@@ -14,11 +14,8 @@ phases:
       - docker build -t nodeapp .
       - docker tag nodeapp:latest 151500355301.dkr.ecr.ap-south-1.amazonaws.com/assignment:latest
       - docker push 151500355301.dkr.ecr.ap-south-1.amazonaws.com/assignment:latest
+      - echo Pushing the Docker images...
+      - sshpass -p $SSHPASS ssh deployuser@$EC2_IP "./deploy.sh"
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker images...
-      - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s:latest"}]' nodeapp 151500355301.dkr.ecr.ap-south-1.amazonaws.com/assignment > imagedefinitions.json
-artifacts:
-    files: imagedefinitions.json
+      - echo Build completed and Deployment completed on `date`
