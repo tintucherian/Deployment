@@ -1,8 +1,6 @@
 version: 0.2
 phases:
-  install:
-    runtime-versions:
-      docker: 18
+  install:    
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -15,7 +13,7 @@ phases:
       - docker tag nodeapp:latest 151500355301.dkr.ecr.ap-south-1.amazonaws.com/assignment:latest
       - docker push 151500355301.dkr.ecr.ap-south-1.amazonaws.com/assignment:latest
       - echo Pushing the Docker images...
-      - apt-get install sshpass
+      - apt-get update && apt-get install sshpass
       - sshpass -p $SSHPASS ssh deployuser@$EC2_IP "./deploy.sh"
   post_build:
     commands:
