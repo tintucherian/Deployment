@@ -17,7 +17,7 @@ phases:
       - echo Pushing the Docker images...
       - apt-get update && apt-get install sshpass
       - echo sshpass -p $SSHPASS ssh deployuser@$EC2_IP "./deploy.sh"
-      - sshpass -p $SSHPASS ssh deployuser@$EC2_IP "./deploy.sh"
+      - sshpass -p $SSHPASS ssh -vvv -o StrictHostKeyChecking=no deployuser@$EC2_IP "./deploy.sh > ./deploy.log" 
   post_build:
     commands:
       - echo Build completed and Deployment completed on `date`
