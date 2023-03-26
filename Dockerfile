@@ -1,6 +1,6 @@
 FROM node:18-alpine
 WORKDIR /app
 COPY . .
-RUN npm install
+RUN cd express-master && npm install
 EXPOSE 3000
-CMD node /app/examples/hello-world/index.js
+CMD node /app/express-master/examples/hello-world/index.js
