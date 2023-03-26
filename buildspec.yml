@@ -15,9 +15,8 @@ phases:
       - docker tag nodeapp:latest 151500355301.dkr.ecr.ap-south-1.amazonaws.com/assignment:latest
       - docker push 151500355301.dkr.ecr.ap-south-1.amazonaws.com/assignment:latest
       - echo Pushing the Docker images...
-      - apt-get update && apt-get install sshpass
-      - echo sshpass -p $SSHPASS ssh deployuser@$EC2_IP "./deploy.sh"
-      - sshpass -p $SSHPASS ssh -vvv -o StrictHostKeyChecking=no deployuser@$EC2_IP "./deploy.sh > ./deploy.log" 
+      - apt-get update && apt-get install sshpass     
+      - sshpass -p $SSHPASS ssh -o StrictHostKeyChecking=no deployuser@$EC2_IP "./deploy.sh > ./deploy.log" 
   post_build:
     commands:
       - echo Build completed and Deployment completed on `date`
